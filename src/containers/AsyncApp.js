@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SearchBar from '../components/SearchBar'
-import { fetchGifs } from '../actions'
+import { fetchGifs, fetchGifsTrending } from '../actions'
 import { connect } from 'react-redux'
 import logo from '../logo.svg';
 import '../styles/App.css';
@@ -18,17 +18,19 @@ class AsyncApp extends Component {
     }
 
     componentDidMount() {
-        // const { dispatch } = this.props
-        // dispatch(fetchTrendingGifs())
-    }:
+        const { dispatch } = this.props
+        dispatch(fetchGifsTrending())
+    }
 
     handleChange(event) {
         this.setState({searchTerm: event.target.value})
     }
 
     handleSubmit(event) {
-        const { dispatch } = this.props
-        dispatch(fetchGifs(this.state.searchTerm))
+        const { dispatch, previousSearchTerm } = this.props
+        if (!!this.state.searchTerm && this.state.searchTerm !== previousSearchTerm ) {
+            dispatch(fetchGifs(this.state.searchTerm))
+        }
         event.preventDefault()
     }
 
@@ -43,10 +45,21 @@ class AsyncApp extends Component {
                     To get started, enter a search term in the search bar.
                 </p>
 
-                <SearchBar onChange={this.handleChange} onSubmit={this.handleSubmit} value={this.searchTerm}/>
+                <SearchBar
+                    onChange={this.handleChange}
+                    onSubmit={this.handleSubmit}
+                    value={this.searchTerm}/>
             </div>
         );
     }
 }
 
-export default connect()(AsyncApp)
+function mapStateToProps(state) {
+    const { searched } = state
+    const previousSearchTerm = searched.searchedTerms[searched.searchedTerms.length - 1]
+    return {
+        previousSearchTerm
+    }
+}
+
+export default connect(mapStateToProps)(AsyncApp)
