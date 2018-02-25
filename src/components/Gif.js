@@ -1,13 +1,9 @@
 import React, { Component } from 'react'
 
-class Gif extends Component {
+export default class Gif extends Component {
     render() {
         return (
-            <div>
-                A GIF
-            </div>
+            <img src={this.props.url} className="gif hidden" alt="gif"/>
         )
     }
 }
-
-export default Gif
