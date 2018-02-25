@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import SearchBar from '../components/SearchBar'
 import Gifs from '../components/Gifs'
 import { fetchGifs, fetchGifsTrending } from '../actions'
 import { connect } from 'react-redux'
-import logo from '../logo.svg';
-import '../styles/App.css';
+import logo from '../logo.svg'
+import '../styles/App.css'
 
 class AsyncApp extends Component {
     constructor(props) {
@@ -29,14 +29,16 @@ class AsyncApp extends Component {
 
     handleSubmit(event) {
         const { dispatch, previousSearchTerm } = this.props
+
         if (!!this.state.searchTerm && this.state.searchTerm !== previousSearchTerm ) {
             dispatch(fetchGifs(this.state.searchTerm))
         }
+        
         event.preventDefault()
     }
 
     render() {
-        const { searchResults } = this.props
+        const { searchResults, trendingResults } = this.props
 
         return (
             <div className="App">
@@ -53,18 +55,20 @@ class AsyncApp extends Component {
                     onSubmit={this.handleSubmit}
                     value={this.searchTerm}/>
 
-                {!!searchResults.length ? <Gifs results={searchResults}></Gifs> : ''}
+                {!!trendingResults.length ? <Gifs results={trendingResults}/> : ''}
             </div>
-        );
+        )
     }
 }
 
 function mapStateToProps(state) {
-    const { searched } = state
+    const { searched, trending } = state
     const previousSearchTerm = searched.searchedTerms[searched.searchedTerms.length - 1]
+
     return {
         previousSearchTerm,
-        searchResults: searched.all
+        searchResults: searched.all,
+        trendingResults: trending.all
     }
 }
 

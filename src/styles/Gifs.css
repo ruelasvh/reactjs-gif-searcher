@@ -1,0 +1,23 @@
+.container {
+    max-width: 100%;
+    background: black;
+}
+
+.gifs-container {
+    margin: 0 auto;
+    padding-top: 1%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.gifs-item {
+    flex-grow: 10;
+    flex-shrink: 20;
+    padding-bottom: 10px;
+}
+
+h3 {
+    color: lightgray;
+    padding-top: 20px;
+}
