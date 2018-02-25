@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SearchBar from '../components/SearchBar'
-import Gif from '../components/Gif'
+import Gifs from '../components/Gifs'
 import { fetchGifs, fetchGifsTrending } from '../actions'
 import { connect } from 'react-redux'
 import logo from '../logo.svg';
@@ -37,10 +37,6 @@ class AsyncApp extends Component {
 
     render() {
         const { searchResults } = this.props
-        let gif = null
-        if (searchResults.length) {
-            gif = <Gif url={searchResults[0].images.downsized.url}/>
-        }
 
         return (
             <div className="App">
@@ -57,7 +53,7 @@ class AsyncApp extends Component {
                     onSubmit={this.handleSubmit}
                     value={this.searchTerm}/>
 
-                {gif}
+                {!!searchResults.length ? <Gifs results={searchResults}></Gifs> : ''}
             </div>
         );
     }
