@@ -26,11 +26,16 @@ function trending(state = initialState.trending, action) {
 }
 
 function searched(state = initialState.searched, action) {
+    const searchedTerms = [...state.searchedTerms]
+    if (searchedTerms.indexOf(action.searchTerm) === -1) {
+        searchedTerms.push(action.searchTerm)
+    }
+
     switch (action.type) {
         case REQUEST_GIFS:
             return Object.assign({}, state, {
                 isFetching: true,
-                searchedTerms: [...state.searchedTerms, action.searchTerm]
+                searchedTerms: searchedTerms
             })
         case RECEIVE_GIFS:
             return Object.assign({}, state, {
