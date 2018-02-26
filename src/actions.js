@@ -8,8 +8,8 @@ export const RECEIVE_GIFS_TRENDING = 'RECEIVE_GIFS_TRENDING'
 const PUBLIC_KEY = 'cj9W6sAghutnKtFaaCSV9XBWNnkpP53Z'
 const BASE_URL = '//api.giphy.com'
 const SEARCH_ENDPOINT = '/v1/gifs/search'
-const LIMIT = 1
-const RATING = 'pg'
+const LIMIT = 25
+const RATING = 'g'
 const OFFSET = 0
 const TRENDING_ENDPOINT = '/v1/gifs/trending'
 

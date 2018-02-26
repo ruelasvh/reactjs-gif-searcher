@@ -38,7 +38,12 @@ class AsyncApp extends Component {
     }
 
     render() {
-        const { searchResults, trendingResults } = this.props
+        const {
+            searchResults,
+            searchIsFetching,
+            trendingResults,
+            trendingIsFetching
+        } = this.props
 
         return (
             <div className="App">
@@ -47,7 +52,7 @@ class AsyncApp extends Component {
                     <h1 className="App-title">Welcome to Giphy Searcher</h1>
                 </header>
                 <p className="App-intro">
-                    To get started, enter a search term in the search bar.
+                    To get started, enter a search term to find a GIF.
                 </p>
 
                 <SearchBar
@@ -55,7 +60,10 @@ class AsyncApp extends Component {
                     onSubmit={this.handleSubmit}
                     value={this.searchTerm}/>
 
-                {!!trendingResults.length ? <Gifs results={trendingResults}/> : ''}
+                {!!searchResults.length ?
+                    <Gifs results={searchResults} header={'Search results'} loading={searchIsFetching}/>
+                    : <Gifs results={trendingResults} header={'Trending now'} loading={trendingIsFetching}/>
+                }
             </div>
         )
     }
@@ -68,7 +76,9 @@ function mapStateToProps(state) {
     return {
         previousSearchTerm,
         searchResults: searched.all,
-        trendingResults: trending.all
+        searchIsFetching: searched.isFetching,
+        trendingResults: trending.all,
+        trendingIsFetching: trending.isFetching
     }
 }
 
