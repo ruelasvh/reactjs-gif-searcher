@@ -1,19 +1,21 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import '../styles/SearchBar.css'
 
-export default class SearchBar extends Component {
+class SearchBar extends Component {
     render() {
-        const { onChange, onSubmit, value, searchedTerms } = this.props
+        const { onChange, onSubmit, onOptionsChange, value, searchedTerms } = this.props
         return (
             <form onSubmit={onSubmit}>
                 <datalist id="search-terms">
-                    {searchedTerms.map(term => <option value={term}></option>)}
+                    {searchedTerms.map((term, i) => <option key={i} value={term}></option>)}
                 </datalist>
                 <div className="search-container">
                     <span className="search-icon"><i className="fa fa-search"/></span>
                     <input
                         id="search"
                         onChange={onChange}
+                        onInput={onOptionsChange}
                         value={value}
                         type="text"
                         list="search-terms"
@@ -23,3 +25,13 @@ export default class SearchBar extends Component {
         )
     }
 }
+
+SearchBar.propTypes = {
+    onChange: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+    onOptionsChange: PropTypes.func.isRequired,
+    value: PropTypes.string,
+    searchedTerms: PropTypes.array.isRequired
+}
+
+export default SearchBar

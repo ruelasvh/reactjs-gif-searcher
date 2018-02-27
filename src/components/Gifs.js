@@ -4,12 +4,11 @@ import { CubeGrid } from 'styled-loaders-react'
 import Gif from './GifItem'
 import '../styles/Gifs.css'
 
-const Gifs = ({ results, header, loading }) => (
+const Gifs = ({ results, loading }) => (
     <div>
         {loading ?
-            <CubeGrid/>
+            <CubeGrid color="white"/>
             : <div className="container">
-                <h3 className="header">{header}</h3>
                 <div className="gifs-container">
                     {results.map((gif, i) =>
                         <div key={i} className="gifs-item">
@@ -23,7 +22,8 @@ const Gifs = ({ results, header, loading }) => (
 )
 
 Gifs.propTypes = {
-    results: PropTypes.array.isRequired
+    results: PropTypes.array.isRequired,
+    loading: PropTypes.bool.isRequired
 }
 
 export default Gifs

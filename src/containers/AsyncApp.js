@@ -16,6 +16,7 @@ class AsyncApp extends Component {
 
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleOptionsSelect = this.handleOptionsSelect.bind(this)
     }
 
     componentDidMount() {
@@ -37,6 +38,13 @@ class AsyncApp extends Component {
         event.preventDefault()
     }
 
+    handleOptionsSelect (event) {
+        const { dispatch, searchedTerms } = this.props
+        if (searchedTerms.indexOf(event.target.value) !== -1) {
+            dispatch(fetchGifs(event.target.value))
+        }
+    }
+
     render() {
         const {
             searchResults,
@@ -54,12 +62,13 @@ class AsyncApp extends Component {
                     <SearchBar
                         onChange={this.handleChange}
                         onSubmit={this.handleSubmit}
+                        onOptionsChange={this.handleOptionsSelect}
                         value={this.searchTerm}
                         searchedTerms={searchedTerms}/>
                 </header>
 
                 {!!searchResults.length ?
-                    <Gifs results={searchResults} header={'Search results'} loading={searchIsFetching}/>
+                    <Gifs results={searchResults} loading={searchIsFetching}/>
                     : <Gifs results={trendingResults} header={'Trending now'} loading={trendingIsFetching}/>
                 }
             </div>

@@ -22,10 +22,9 @@
     font-family: interface, Helvetica Neue, helvetica, sans-serif;
     padding-top: 20px;
     letter-spacing: .01em;
-    text-transform: uppercase;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-weight: 600;
-    color: #b2b2b2;
-    font-size: 14px;
+    color: white;
+    font-size: 24px;
 }
