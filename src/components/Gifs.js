@@ -5,17 +5,12 @@ import Gif from './GifItem'
 import '../styles/Gifs.css'
 
 class Gifs extends Component {
-    constructor(props) {
-        super(props)
-    }
-
     shouldComponentUpdate(nextProps) {
         return (nextProps.loading !== this.props.loading
             || nextProps.results !== this.props.results)
     }
 
     render () {
-        console.log('Rendering Gifs')
         const { results, loading } = this.props
         return (
             <div>

@@ -8,7 +8,6 @@ class SearchBar extends Component {
     }
 
     render() {
-        console.log('Rendering SearchBar')
         const { onChange, onSubmit, onOptionsChange, value, searchedTerms } = this.props
         return (
             <form onSubmit={onSubmit}>
