@@ -3,7 +3,12 @@ import PropTypes from 'prop-types'
 import '../styles/SearchBar.css'
 
 class SearchBar extends Component {
+    shouldComponentUpdate(nextProps) {
+        return nextProps.searchedTerms !== this.props.searchedTerms
+    }
+
     render() {
+        console.log('Rendering SearchBar')
         const { onChange, onSubmit, onOptionsChange, value, searchedTerms } = this.props
         return (
             <form onSubmit={onSubmit}>

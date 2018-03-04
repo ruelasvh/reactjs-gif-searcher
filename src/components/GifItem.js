@@ -24,6 +24,7 @@ class Gif extends Component {
     }
 
     render () {
+        console.log('Rendering GifItem')
         const { url } = this.props
 
         return (
